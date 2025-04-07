@@ -16,16 +16,13 @@ return new class extends Migration {
                 ->constrained()
                 ->onDelete('cascade');
 
-            $table->foreignId('car_model_id')
-                ->constrained()
-                ->onDelete('cascade');
 
             $table->string('license_plate')->unique();
             $table->unsignedInteger('mileage')->nullable();
             $table->foreignId('owner_id')
                 ->constrained()
                 ->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }

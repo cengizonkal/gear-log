@@ -10,33 +10,26 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vehicle_model_id')
+
+            
+            $table->foreignId('vehicle_id')
                 ->constrained()
                 ->onDelete('cascade');
 
-
-            $table->string('license_plate')->unique();
-            $table->unsignedInteger('mileage')->nullable();
-            $table->foreignId('owner_id')
+            
+            $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade');
+            
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('finished_at')->nullable();
 
 
-
-
-            $table->foreignId('fuel_type_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->string('vin')->unique()->nullable();
 
 
             $table->timestamps();
-
-
-
-
         });
     }
 
@@ -45,6 +38,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicles');
+        Schema::dropIfExists('services');
     }
 };

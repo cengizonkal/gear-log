@@ -38,5 +38,13 @@ class Vehicle extends Model
     {
         return $this->belongsTo(FuelType::class);
     }
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+    public function scopeWithDetails($query)
+    {
+        return $query->with(['vehicleModel.brand', 'owner', 'fuelType']);
+    }
     
 }

@@ -17,6 +17,7 @@ return new class extends Migration {
                 ->constrained()
                 ->onDelete('cascade');
             $table->unsignedInteger('year')->nullable();
+            $table->unsignedInteger('engine_capacity')->nullable();
 
             $table->timestamps();
         });

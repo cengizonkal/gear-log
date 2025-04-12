@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- *@mixin \App\Models\Vehicle
+ * @mixin \App\Models\Vehicle
  */
-class VehcileWithDetailsResource extends JsonResource
+class VehicleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,14 +19,12 @@ class VehcileWithDetailsResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'plate_number' => $this->plate_number,
+            'license_plate' => $this->license_plate,
+            'mileage' => $this->mileage,
+            'vin' => $this->vin,
             'fuel_type' => $this->fuelType->name,
             'vehicle_model' => $this->vehicleModel->name,
             'brand' => $this->vehicleModel->brand->name,
-            'owner' => new OwnerResource($this->owner),
-            'vin' => $this->vin,
-            'mileage' => $this->mileage,
-    
         ];
     }
 }

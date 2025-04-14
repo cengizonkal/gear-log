@@ -12,10 +12,7 @@ Route::post('/login',[AuthController::class, 'login'])
 
 //vehicle routes
 //jwt auth middleware
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-], function ($router) {
+Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/vehicles/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'show'])
         ->name('vehicles.show');

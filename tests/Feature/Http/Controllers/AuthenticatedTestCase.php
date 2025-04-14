@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-abstract class LoggedIn extends TestCase
+abstract class AuthenticatedTestCase extends TestCase
 {
     use RefreshDatabase, WithFaker;
     protected $user;

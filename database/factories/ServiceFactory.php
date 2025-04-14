@@ -17,7 +17,10 @@ class ServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'vehicle_id' => \App\Models\Vehicle::factory(),
+            'user_id' => \App\Models\User::factory(),
+            'finished_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'started_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

@@ -6,9 +6,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class VehicleControllerTest extends TestCase
+class VehicleControllerTest extends LoggedIn
 {
     use RefreshDatabase, WithFaker;
+
 
     public function test_it_should_give_vehicle_with_details(): void
     {

@@ -21,7 +21,7 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        return new ServiceResource($service->load(['vehicle', 'user']));
+        return new ServiceResource($service);
     }
 
     public function update(StoreServiceRequest $request, Service $service)

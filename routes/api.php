@@ -25,9 +25,6 @@ Route::get('/user', [AuthController::class, 'me'])
 
 Route::middleware(['auth:api'])->group(function () {
 
-    Route::get('/vehicles/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'show'])
-        ->name('vehicles.show');
-
     // Services
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');

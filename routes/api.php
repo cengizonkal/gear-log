@@ -3,20 +3,24 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 
 
 
-Route::post('/login',[AuthController::class, 'login'])
+Route::post('/login', [AuthController::class, 'login'])
     ->name('login');
 
 //vehicle routes
 //jwt auth middleware
-Route::middleware(['auth:api'])->group(function () {
+Route::get('/vehicles/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'show'])
+    ->name('vehicles.show')->middleware('auth:api');
 
-    Route::get('/vehicles/{vehicle}', [\App\Http\Controllers\VehicleController::class, 'show'])
-        ->name('vehicles.show');
+Route::get('/user', [AuthController::class, 'me'])
+    ->name('user.show')->middleware('auth:api');
 
-});
+
+
+
+
 
 

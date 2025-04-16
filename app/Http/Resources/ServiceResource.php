@@ -25,7 +25,7 @@ class ServiceResource extends JsonResource
             'finished_at' => $this->finished_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'items' => $this->items,
+            'items' => ItemResource::collection($this->whenLoaded('items')),
         ];
     }
 }

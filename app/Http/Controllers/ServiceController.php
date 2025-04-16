@@ -16,12 +16,12 @@ class ServiceController extends Controller
     public function store(StoreServiceRequest $request)
     {
         $service = Service::create($request->validated());
-        return new ServiceResource($service->load(['vehicle', 'user']));
+        return new ServiceResource($service);
     }
 
     public function show(Service $service)
     {
-        return new ServiceResource($service);
+        return new ServiceResource($service->load(['items']));
     }
 
     public function update(StoreServiceRequest $request, Service $service)

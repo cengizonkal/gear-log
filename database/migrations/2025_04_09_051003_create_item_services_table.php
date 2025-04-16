@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_services', function (Blueprint $table) {
+        Schema::create('item_service', function (Blueprint $table) {
             $table->id();
 
             //many to many table between service and items
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_services');
+        Schema::dropIfExists('item_service');
     }
 };

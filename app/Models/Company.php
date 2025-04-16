@@ -16,12 +16,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Company extends Model
 {
     /** @use HasFactory<\Database\Factories\CompanyFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'name',
         'phone',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 
     public function items()
     {

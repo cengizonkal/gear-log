@@ -22,7 +22,7 @@ class ItemController extends Controller
         return new ItemResource($item);
     }
 
-    public function show(Item $item, Company $company)
+    public function show(Company $company, Item $item)
     {
         if ($item->company_id !== $company->id) {
             return response()->json(['message' => 'Bu ürün bu şirkete ait değil.'], 403);

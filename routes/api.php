@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ServiceController;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
 
-Route::post('/login',  [AuthController::class, 'login'])
+Route::post('/login', [AuthController::class, 'login'])
     ->name('login');
 
 //vehicle routes
@@ -21,6 +22,8 @@ Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])
 
 Route::get('/user', [AuthController::class, 'me'])
     ->name('user.show')->middleware('auth:api');
+
+
 
 
 Route::middleware(['auth:api'])->group(function () {
@@ -39,12 +42,19 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('/owners/{owner}', [OwnerController::class, 'update'])->name('owners.update');
     Route::delete('/owners/{owner}', [OwnerController::class, 'delete'])->name('owners.delete');
 
-    // Items
-    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-    Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
-    Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
-    Route::delete('/items/{item}', [ItemController::class, 'delete'])->name('items.delete');
+    // Company
+    Route::prefix('companies/{company}')->group(function () {
+        Route::get('/', [CompanyController::class, 'show'])->name('companies.show');
+
+        // Item Routes (Nested under the Company)
+        Route::prefix('items')->group(function () {
+            Route::get('/', [ItemController::class, 'index'])->name('companies.items.index');
+            Route::post('/', [ItemController::class, 'store'])->name('companies.items.store');
+            Route::get('/{item}', [ItemController::class, 'show'])->name('companies.items.show');
+            Route::put('/{item}', [ItemController::class, 'update'])->name('companies.items.update');
+            Route::delete('/{item}', [ItemController::class, 'delete'])->name('companies.items.delete');
+        });
+    });
 
     // User
     Route::post('/users', [UserController::class, 'store'])->name('users.store');

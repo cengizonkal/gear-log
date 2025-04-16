@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
@@ -38,6 +39,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/owners/{owner}', [OwnerController::class, 'show'])->name('owners.show');
     Route::put('/owners/{owner}', [OwnerController::class, 'update'])->name('owners.update');
     Route::delete('/owners/{owner}', [OwnerController::class, 'delete'])->name('owners.delete');
+
+    // Items
+    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
+    Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
+    Route::delete('/items/{item}', [ItemController::class, 'delete'])->name('items.delete');
 
 
 });

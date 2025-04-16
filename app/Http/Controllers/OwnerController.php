@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOwnerRequest;
+use App\Http\Requests\OwnerRequest;
 use App\Http\Resources\OwnerResource;
 use App\Models\Owner;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class OwnerController extends Controller
         return OwnerResource::collection($owners);
     }
 
-    public function store(StoreOwnerRequest $request)
+    public function store(OwnerRequest $request)
     {
         $owner = Owner::create($request->validated());
         return new OwnerResource($owner);
@@ -26,7 +26,7 @@ class OwnerController extends Controller
         return new OwnerResource($owner->load('vehicles'));
     }
 
-    public function update(StoreOwnerRequest $request, Owner $owner)
+    public function update(OwnerRequest $request, Owner $owner)
     {
         $owner->update($request->validated());
         return new OwnerResource($owner);

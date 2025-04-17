@@ -36,7 +36,7 @@ class CompanyControllerTest extends TestCase
                         'id',
                         'name',
                         'description',
-                        'price'
+                        'default_price',
                     ]
                 ]
             ]

@@ -21,5 +21,12 @@ class Item extends Model
     {
         return $this->belongsTo(Company::class);
     }
-    
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class)
+            ->withPivot('quantity', 'price')
+            ->withTimestamps();
+    }
+
 }

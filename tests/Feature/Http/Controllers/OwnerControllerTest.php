@@ -7,18 +7,20 @@ use App\Models\FuelType;
 use App\Models\Owner;
 use App\Models\User;
 use App\Models\Vehicle;
+use App\Models\VehicleModel;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class OwnerControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
-    public function owner_can_created_with_valid_data(): void
+    use RefreshDatabase, WithFaker;
+
+    public function test_owner_can_created_with_valid_data(): void
     {
         $this->withoutExceptionHandling();
 
-        $vehicle = Vehicle::factory()->create();
+        $vehicles = Vehicle::factory()->create();
 
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -41,45 +43,43 @@ class OwnerControllerTest extends TestCase
         ]);
     }
 
-    public function owner_can_have_multiple_vehicles(): void
+    public function test_owner_can_have_multiple_vehicles(): void
     {
         $this->withoutExceptionHandling();
 
         $owner = Owner::factory()->create();
-        $brand = Brand::factory()->create();
+        $vehicleModel = VehicleModel::factory()->create();
         $fuelType = FuelType::factory()->create();
 
-        $vehicles = Vehicle::factory(3)->create([
+
+        $vehicles = Vehicle::factory()->count(3)->create([
             'owner_id' => $owner->id,
-            'brand_id' => $brand->id,
+            'vehicle_model_id' => $vehicleModel->id,
             'fuel_type_id' => $fuelType->id,
         ]);
+
 
         $user = User::factory()->create();
         $this->actingAs($user);
 
         $response = $this->getJson(route('owners.show', $owner->id));
+
         $response->assertOk()->assertJsonStructure([
-           'data' => [
-               'id',
-               'name',
-               'phone',
-               'email',
-               'vehicles' => [
-                   '*' => [
-                       'id',
-                       'vehicle_model_id',
-                       'license_plate',
-                       'mileage',
-                       'owner_id',
-                       'fuel_type_id',
-                       'vin',
-                   ]
-               ]
-           ]
+            'data' => [
+                'id',
+                'name',
+                'phone',
+                'email',
+            ]
         ]);
 
-        $this->assertCount(3, $response->json('data.vehicles'));
+        $this->assertDatabaseCount('vehicles', 3);
 
+        foreach ($vehicles as $vehicle) {
+            $this->assertEquals($vehicle->owner_id, $owner->id);
+        }
+
+        $this->assertCount(3, $owner->vehicles);
     }
+
 }

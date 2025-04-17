@@ -8,10 +8,12 @@ use App\Http\Resources\ItemResource;
 use App\Models\Vehicle;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Dedoc\Scramble\Attributes\Group;
 
+#[Group('Vehicle\Service\Item')]
 class ItemController extends Controller
 {
-    public function index(Vehicle $vehicle,Service $service)
+    public function index(Vehicle $vehicle, Service $service)
     {
         return ItemResource::collection($service->items);
     }
@@ -21,6 +23,10 @@ class ItemController extends Controller
         $item = $service->items()->attach($request->item_id, [
             'quantity' => $request->quantity,
             'price' => $request->price,
+        ]);
+
+        return response()->json([
+            'message' => 'Ürün servise eklendi.',
         ]);
     }
 }

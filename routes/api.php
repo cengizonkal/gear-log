@@ -70,7 +70,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/vehicles/{vehicle}/services', [\App\Http\Controllers\Vehicle\ServiceController::class, 'store'])->name('vehicles.services.store');
 
     //items
-    Route::get('/vehicles/{vehicle}/services/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'index'])->name('vehicles.services.items.index');
+    Route::get('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'index'])->name('vehicles.services.items.index');
+    Route::post('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'store'])->name('vehicles.services.items.store');
 
     
     //user

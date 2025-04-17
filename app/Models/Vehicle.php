@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $vin
  * @property mixed $created_at
  * @property mixed $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Service[] $services
  */
 class Vehicle extends Model
 {

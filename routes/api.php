@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\AuthController;
-use \App\Http\Controllers\VehicleController;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\Admin\BrandController;
 
 Route::post('/login',  [AuthController::class, 'login'])
     ->name('login');
@@ -41,9 +42,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/vehicles/{vehicle}/services/{service}', [\App\Http\Controllers\Vehicle\ServiceController::class, 'show'])->name('vehicles.services.show');
     Route::post('/vehicles/{vehicle}/services/{service}', [\App\Http\Controllers\Vehicle\ServiceController::class, 'store'])->name('vehicles.services.store');
 
-
+    
     //user
     Route::get('/user', [AuthController::class, 'me'])->name('user.show');
+
+    //brands
+    Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 
 
 });

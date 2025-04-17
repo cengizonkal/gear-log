@@ -13,4 +13,13 @@ class Brand extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function vehicleModels()
+    {
+        return $this->hasMany(VehicleModel::class);
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'name';
+    }
 }

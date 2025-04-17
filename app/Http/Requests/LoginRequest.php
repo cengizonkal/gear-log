@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @property mixed $email
+ * @property mixed $email 
  * @property mixed $password
  */
 class LoginRequest extends FormRequest

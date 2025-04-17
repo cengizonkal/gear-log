@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
+use App\Models\Item;
 use App\Models\User;
 
 class ItemPolicy
 {
-    public function update(User $user, $item): bool
+    public function update(User $user, Item $item): bool
     {
         return $user->company_id === $item->company_id;
     }

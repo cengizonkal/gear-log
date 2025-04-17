@@ -14,7 +14,7 @@ class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'company_id',
     ];
 
     /**
@@ -65,10 +66,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Company::class);
     }
 
+<<<<<<< HEAD
     public function isAdmin(): bool
     {
         return $this->is_admin;
     }
 
     
+=======
+
+>>>>>>> master
 }

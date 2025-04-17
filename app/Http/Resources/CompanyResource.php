@@ -21,6 +21,7 @@ class CompanyResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'phone' => $this->phone,
+            'items' => ItemResource::collection($this->whenLoaded('items')),
         ];
     }
 }

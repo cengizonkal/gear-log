@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\ServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 class ServiceController extends Controller
@@ -13,7 +13,7 @@ class ServiceController extends Controller
         return ServiceResource::collection($services);
     }
 
-    public function store(StoreServiceRequest $request)
+    public function store(ServiceRequest $request)
     {
         $service = Service::create($request->validated());
         return new ServiceResource($service);
@@ -24,7 +24,7 @@ class ServiceController extends Controller
         return new ServiceResource($service->load(['items','user']));
     }
 
-    public function update(StoreServiceRequest $request, Service $service)
+    public function update(ServiceRequest $request, Service $service)
     {
         $service->update($request->validated());
         return new ServiceResource($service->load(['vehicle', 'user']));

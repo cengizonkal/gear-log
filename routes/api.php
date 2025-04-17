@@ -49,6 +49,9 @@ Route::middleware(['auth:api'])->group(function () {
     //brands
     Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 
+    //dashboard
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard.show');
+
 
 });
 

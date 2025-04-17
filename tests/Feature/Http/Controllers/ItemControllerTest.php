@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Company;
 use App\Models\Item;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ItemControllerTest extends TestCase
@@ -12,6 +13,7 @@ class ItemControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
+    use RefreshDatabase;
     public function test_it_should_give_item_details(): void
     {
         $this->withoutExceptionHandling();

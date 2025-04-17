@@ -49,11 +49,20 @@ Route::middleware(['auth:api'])->group(function () {
 
         // Item Routes (Nested under the Company)
         Route::prefix('items')->group(function () {
-            Route::get('/', [ItemController::class, 'index'])->name('companies.items.index');
-            Route::post('/', [ItemController::class, 'store'])->name('companies.items.store');
-            Route::get('/{item}', [ItemController::class, 'show'])->name('companies.items.show');
-            Route::put('/{item}', [ItemController::class, 'update'])->name('companies.items.update');
-            Route::delete('/{item}', [ItemController::class, 'delete'])->name('companies.items.delete');
+            Route::get('/', [ItemController::class, 'index'])->name('companies.items.index')->middleware('can:update,company');
+            Route::post('/', [ItemController::class, 'store'])->name('companies.items.store')->middleware('can:update,company');
+            
+            Route::get('/{item}', [ItemController::class, 'show'])->name('companies.items.show')
+            ->middleware('can:update,item')
+            ->middleware('can:update,company');
+            
+            Route::put('/{item}', [ItemController::class, 'update'])->name('companies.items.update')
+            ->middleware('can:update,item')
+            ->middleware('can:update,company');
+            
+            Route::delete('/{item}', [ItemController::class, 'delete'])->name('companies.items.delete')
+            ->middleware('can:update,item')
+            ->middleware('can:update,company');
         });
     });
 

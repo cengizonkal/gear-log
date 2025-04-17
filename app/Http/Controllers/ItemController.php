@@ -24,17 +24,12 @@ class ItemController extends Controller
 
     public function show(Company $company, Item $item)
     {
-        if ($item->company_id !== $company->id) {
-            return response()->json(['message' => 'Bu ürün bu şirkete ait değil.'], 403);
-        }
         return new ItemResource($item->load('company'));
     }
 
     public function update(ItemRequest $request, Item $item, Company $company)
     {
-        if ($item->company_id !== $company->id) {
-            return response()->json(['message' => 'Bu ürün bu şirkete ait değil.'], 403);
-        }
+     
 
         $item->update($request->validated());
         return new ItemResource($item->load('company'));
@@ -42,9 +37,7 @@ class ItemController extends Controller
 
     public function delete(Item $item, Company $company)
     {
-        if ($item->company_id !== $company->id) {
-            return response()->json(['message' => 'Bu ürün bu şirkete ait değil.'], 403);
-        }
+     
         $item->delete();
         return response()->json(['message' => 'Ürün başarıyla silindi.'], 200);
     }

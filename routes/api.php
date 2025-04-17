@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 
 
-Route::post('/login', [AuthController::class, 'login'])
+Route::post('/login',  [AuthController::class, 'login'])
     ->name('login');
 
 //vehicle routes
@@ -22,6 +22,7 @@ Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])
 
 Route::get('/user', [AuthController::class, 'me'])
     ->name('user.show')->middleware('auth:api');
+
 
 
 
@@ -61,6 +62,16 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
+
+    // Vehicle
+    Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])->name('vehicles.show');
+    Route::get('/vehicles/{vehicle}/services', [\App\Http\Controllers\Vehicle\ServiceController::class, 'index'])->name('vehicles.services.index');
+    Route::get('/vehicles/{vehicle}/services/{service}', [\App\Http\Controllers\Vehicle\ServiceController::class, 'show'])->name('vehicles.services.show');
+    Route::post('/vehicles/{vehicle}/services/{service}', [\App\Http\Controllers\Vehicle\ServiceController::class, 'store'])->name('vehicles.services.store');
+
+
+    //user
+    Route::get('/user', [AuthController::class, 'me'])->name('user.show');
 
 
 });

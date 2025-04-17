@@ -67,7 +67,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])->name('vehicles.show');
     Route::get('/vehicles/{vehicle}/services', [\App\Http\Controllers\Vehicle\ServiceController::class, 'index'])->name('vehicles.services.index');
     Route::get('/vehicles/{vehicle}/services/{service}', [\App\Http\Controllers\Vehicle\ServiceController::class, 'show'])->name('vehicles.services.show');
-    Route::post('/vehicles/{vehicle}/services/', [\App\Http\Controllers\Vehicle\ServiceController::class, 'store'])->name('vehicles.services.store');
+    Route::post('/vehicles/{vehicle}/services', [\App\Http\Controllers\Vehicle\ServiceController::class, 'store'])->name('vehicles.services.store');
+
+    //items
+    Route::get('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'index'])->name('vehicles.services.items.index');
+    Route::post('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'store'])->name('vehicles.services.items.store');
 
     
     //user

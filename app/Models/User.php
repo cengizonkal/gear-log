@@ -66,14 +66,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Company::class);
     }
 
-<<<<<<< HEAD
+
     public function isAdmin(): bool
     {
         return $this->is_admin;
     }
 
-    
-=======
 
->>>>>>> master
 }

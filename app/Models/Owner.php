@@ -15,4 +15,9 @@ class Owner extends Model
         'phone',
         'email',
     ];
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 }

@@ -26,6 +26,10 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Copy env file
+      run: cp .env.example .env
+    - name: Generate application key
+      run: php artisan key:generate
     - name: Setup Jwt Secret
       run: php artisan jwt:secret
 

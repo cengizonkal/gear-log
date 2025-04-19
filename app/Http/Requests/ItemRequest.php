@@ -11,7 +11,7 @@ class ItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class ItemRequest extends FormRequest
             'company_id'   => 'required|exists:companies,id',
             'name'          => 'required|string|max:255',
             'description'   => 'nullable|string|max:255',
-            'price'         => 'required|numeric|min:0',
+            'default_price'         => 'required|numeric|min:0',
         ];
     }
 }

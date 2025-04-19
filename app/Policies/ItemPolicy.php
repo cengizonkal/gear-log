@@ -11,4 +11,9 @@ class ItemPolicy
     {
         return $user->company_id === $item->company_id;
     }
+
+    public function delete(User $user, Item $item)
+    {
+        return $user->company_id === $item->company_id;
+    }
 }

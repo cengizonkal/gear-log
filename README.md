@@ -31,7 +31,7 @@ Bu proje, araçlara ait bakım geçmişini dijital olarak kaydetmek ve yetkili m
 
 ## Pipeline Status
 
-![Tests](https://github.com/your-repo/gear-log-backend/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/cengizonkal/gear-log-backend/actions/workflows/tests.yml/badge.svg)
 
 ## 📦 Kurulum
 

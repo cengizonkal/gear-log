@@ -29,5 +29,9 @@ Bu proje, araçlara ait bakım geçmişini dijital olarak kaydetmek ve yetkili m
 - Mekanikler online başvuru yaparak kayıt olabilir
 - Kayıtlar sistem yöneticisi tarafından onaylanabilir
 
+## Pipeline Status
+
+![Tests](https://github.com/your-repo/gear-log-backend/actions/workflows/tests.yml/badge.svg)
+
 ## 📦 Kurulum
 

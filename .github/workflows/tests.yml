@@ -1,4 +1,4 @@
-name: Run Tests and Coverage
+name: Run Tests
 
 on:
   push:
@@ -20,9 +20,8 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2'
+        php-version: '8.4'
         extensions: mbstring, intl, pdo, sqlite, bcmath
-        coverage: xdebug
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
@@ -33,14 +32,5 @@ jobs:
     - name: Setup Jwt Secret
       run: php artisan jwt:secret
 
-    - name: Run tests with coverage
-      run: |
-        vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        files: coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: true
+    - name: Run tests
+      run: vendor/bin/phpunit

@@ -22,7 +22,7 @@ class ItemController extends Controller
     {
         $item = $service->items()->attach($request->item_id, [
             'quantity' => $request->quantity,
-            'price' => $request->price,
+            'price' => $request->price,     
         ]);
 
         return response()->json([

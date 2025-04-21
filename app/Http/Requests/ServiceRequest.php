@@ -22,9 +22,8 @@ class ServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'vehicle_id'    => 'required|exists:vehicles,id',
-            'user_id'       => 'required|exists:users,id',
-            'started_at'    => 'required|date',
+            'vehicle_id'    => 'exists:vehicles,id',
+            'started_at'    => 'date',
             'finished_at'   => 'nullable|date|after:started_at',
         ];
     }

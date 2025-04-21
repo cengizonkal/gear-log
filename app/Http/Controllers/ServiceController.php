@@ -15,7 +15,9 @@ class ServiceController extends Controller
 
     public function store(ServiceRequest $request)
     {
-        $service = Service::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = auth()->user()->id;
+        $service = Service::create($data);
         return new ServiceResource($service);
     }
 

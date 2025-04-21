@@ -17,6 +17,8 @@ class ServiceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $canViewPrice = $request->user()->can('viewPrice', $this->resource);
+        
         return [
             'id' => $this->id,
             'vehicle' => new VehicleResource($this->whenLoaded('vehicle')),
@@ -25,7 +27,8 @@ class ServiceResource extends JsonResource
             'finished_at' => $this->finished_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'items' => ItemResource::collection($this->whenLoaded('items')),
+            'items' => $canViewPrice ? ItemResource::collection($this->whenLoaded('items')) :
+                ItemWithoutPriceResource::collection($this->whenLoaded('items')),
         ];
     }
 }

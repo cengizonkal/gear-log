@@ -33,8 +33,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
-    Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update');
-    Route::delete('/services/{service}', [ServiceController::class, 'delete'])->name('services.delete');
+    
+    Route::put('/services/{service}', [ServiceController::class, 'update'])
+    ->name('services.update')
+    ->middleware('can:update,service');
+    
+    Route::delete('/services/{service}', [ServiceController::class, 'delete'])
+    ->name('services.delete')
+    ->middleware('can:delete,service');
 
     // Owner
     Route::get('/owners', [OwnerController::class, 'index'])->name('owners.index');

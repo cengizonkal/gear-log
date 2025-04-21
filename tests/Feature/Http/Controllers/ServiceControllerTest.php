@@ -127,5 +127,46 @@ class ServiceControllerTest extends AuthenticatedTestCase
         }
         
     }
+
+    public function test_unauthenticated_user_should_not_see_the_service_item_prices(): void
+    {
+        $this->withoutExceptionHandling();
+        $service = \App\Models\Service::factory()->create();
+
+        $items = \App\Models\Item::factory(10)->create();
+        //add items to the service
+        $service->items()->attach($items->pluck('id')->toArray(), [
+            'price' => $this->faker->randomFloat(2, 1, 100),
+            'quantity' => $this->faker->numberBetween(1, 10),
+        ]);
+
+        $response = $this->getJson(route('services.show', $service->id));
+        $response->assertOk();
+        //ensure that all prices are just *
+        $response->assertJsonFragment([
+            'price' => '*'
+        ]);
+    }
+
+    public function test_authenticated_user_should_see_the_service_item_prices(): void
+    {
+        $this->withoutExceptionHandling();
+        $service = \App\Models\Service::factory()->create();
+
+        $items = \App\Models\Item::factory(10)->create();
+        //add items to the service
+        $service->items()->attach($items->pluck('id')->toArray(), [
+            'price' => 1984,
+            'quantity' => $this->faker->numberBetween(1, 10),
+        ]);
+
+        auth()->login($service->user);
+
+        $response = $this->getJson(route('services.show', $service->id));
+        $response->assertOk();
+        $response->assertJsonFragment([
+            'price' => 1984
+        ]);
+    }
     
 }

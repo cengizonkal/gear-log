@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\FuelType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -60,4 +61,22 @@ class VehicleControllerTest extends AuthenticatedTestCase
 
 
     }
+
+    public function test_it_should_show_all_fuel_types(): void
+    {
+        $this->withoutExceptionHandling();
+        FuelType::factory(5)->create();
+
+        $response = $this->getJson(route('fuel-types.index'));
+        $response->assertOk()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                    ]
+                ]
+            ]);
+    }
+
 }

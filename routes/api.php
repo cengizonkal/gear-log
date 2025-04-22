@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\FuelTypeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ServiceController;
@@ -33,11 +34,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
-    
+
     Route::put('/services/{service}', [ServiceController::class, 'update'])
     ->name('services.update')
     ->middleware('can:update,service');
-    
+
     Route::delete('/services/{service}', [ServiceController::class, 'delete'])
     ->name('services.delete')
     ->middleware('can:delete,service');
@@ -57,15 +58,15 @@ Route::middleware(['auth:api'])->group(function () {
         Route::prefix('items')->group(function () {
             Route::get('/', [ItemController::class, 'index'])->name('companies.items.index')->middleware('can:update,company');
             Route::post('/', [ItemController::class, 'store'])->name('companies.items.store')->middleware('can:update,company');
-            
+
             Route::get('/{item}', [ItemController::class, 'show'])->name('companies.items.show')
             ->middleware('can:update,item')
             ->middleware('can:update,company');
-            
+
             Route::put('/{item}', [ItemController::class, 'update'])->name('companies.items.update')
             ->middleware('can:update,item')
             ->middleware('can:update,company');
-            
+
             Route::delete('/{item}', [ItemController::class, 'delete'])->name('companies.items.delete')
             ->middleware('can:update,item')
             ->middleware('can:update,company');
@@ -88,13 +89,17 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'index'])->name('vehicles.services.items.index');
     Route::post('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'store'])->name('vehicles.services.items.store');
 
-    
+
     //user
     Route::get('/user', [AuthController::class, 'me'])->name('user.show');
 
     //brands
     Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
     Route::post('/brands', [BrandController::class, 'store'])->name('brands.store')->middleware('admin');
+
+    // Fuel Types
+    Route::get('/fuel-types', [FuelTypeController::class, 'index'])->name('fuel-types.index');
+
 
     //dashboard
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'show'])->name('dashboard.show');

@@ -16,7 +16,7 @@ class FuelTypeSeeder extends Seeder
         $fuelTypes = [
             'Benzin',
             'Diesel',
-            'Hybrid',
+            'Hibrit',
             'Elektrik',
         ];
 

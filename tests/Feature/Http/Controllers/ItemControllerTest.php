@@ -50,7 +50,7 @@ class ItemControllerTest extends TestCase
         $itemData = [
             'name' => 'Updated Item',
             'description' => 'Updated Description',
-            'default_price' => 100.00,
+            'price' => 100.00,
             'company_id' => $company->id,
         ];
 

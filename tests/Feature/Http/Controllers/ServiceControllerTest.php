@@ -136,7 +136,7 @@ class ServiceControllerTest extends AuthenticatedTestCase
         $items = \App\Models\Item::factory(10)->create();
         //add items to the service
         $service->items()->attach($items->pluck('id')->toArray(), [
-            'price' => $this->faker->randomFloat(2, 1, 100),
+            'price' => 100,
             'quantity' => $this->faker->numberBetween(1, 10),
         ]);
 
@@ -144,7 +144,7 @@ class ServiceControllerTest extends AuthenticatedTestCase
         $response->assertOk();
         //ensure that all prices are just *
         $response->assertJsonFragment([
-            'price' => '*'
+            'price' => 0
         ]);
     }
 

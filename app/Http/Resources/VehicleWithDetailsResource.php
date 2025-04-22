@@ -26,8 +26,14 @@ class VehicleWithDetailsResource extends JsonResource
             'owner' => new OwnerResource($this->owner),
             'vin' => $this->vin,
             'mileage' => $this->mileage,
-            'services' => ServiceResource::collection($this->services()->with(['user.company'])->latest()->take(3)->get()),
-    
+            'services' => ServiceResource::collection(
+                $this->services()->with(['user.company'])
+                    ->latest('finished_at')
+                    ->orderByDesc('finished_at')
+                    ->take(3)
+                    ->get()
+            ),
+
         ];
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FuelTypeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -99,6 +100,9 @@ Route::middleware(['auth:api'])->group(function () {
 
     // Fuel Types
     Route::get('/fuel-types', [FuelTypeController::class, 'index'])->name('fuel-types.index');
+
+    // Report
+    Route::post('/reports', [ReportController::class, 'generate'])->name('reports.generate');
 
 
     //dashboard

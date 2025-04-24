@@ -9,11 +9,13 @@ use App\Models\Service;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
-class ReportControllerTest extends TestCase
+use Tests\Feature\Http\Controllers\AuthenticatedTestCase;
+
+
+class ReportControllerTest extends AuthenticatedTestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */

@@ -16,6 +16,7 @@ use Tests\Feature\Http\Controllers\AuthenticatedTestCase;
 class ReportControllerTest extends AuthenticatedTestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -67,6 +68,20 @@ class ReportControllerTest extends AuthenticatedTestCase
                 ],
             ],
         ]);
+    }
+
+    public function test_invalid_date_range_returns_error(): void
+    {
+        $company = Company::factory()->create();
+        $user = User::factory()->create(['company_id' => $company->id]);
+        $this->actingAs($user);
+
+        $response = $this->postJson(route('reports.generate'), [
+            'started_at' => now()->addDays(10)->toDateString(), // Future date
+            'finished_at' => now()->subDays(10)->toDateString(), // Past date
+        ]);
+
+        $response->assertStatus(422);
     }
 
     private function createServicesWithItems($user, $vehicle, $items, int $count): void

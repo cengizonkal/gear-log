@@ -17,7 +17,7 @@ class ReportResource extends JsonResource
         $canViewPrice = $request->user()->can('viewPrice', $this->resource);
 
         return [
-            'id' => $this->id,
+            'id' => $this->attributes['id'],
             'started_at' => $this->started_at,
             'finished_at' => $this->finished_at,
             'vehicle' => new VehicleResource($this->whenLoaded('vehicle')),

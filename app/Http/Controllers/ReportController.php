@@ -11,8 +11,8 @@ class ReportController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'started_at' => 'required|date',
-            'finished_at' => 'required|date|after_or_equal:started_at',
+            'started_at' => ['required', 'date'],
+            'finished_at' => ['required', 'date', 'after_or_equal:started_at'],
         ]);
 
         $userCompanyId = auth()->user()->company_id;

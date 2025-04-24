@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Company;
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\ItemRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Company;
 use App\Models\Item;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Dedoc\Scramble\Attributes\Group;
 
+#[Group('Company\Item')]
 class ItemController extends Controller
 {
     use AuthorizesRequests;

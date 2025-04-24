@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FuelTypeController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\Company\ItemController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;

@@ -9,7 +9,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::with(['vehicle', 'user'])->get();;
+        $services = Service::with(['vehicle', 'user','status'])->get();;
         return ServiceResource::collection($services);
     }
 
@@ -23,13 +23,13 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        return new ServiceResource($service->load(['items','user','vehicle']));
+        return new ServiceResource($service->load(['items','user','vehicle','status']));
     }
 
     public function update(ServiceRequest $request, Service $service)
     {
         $service->update($request->validated());
-        return new ServiceResource($service->load(['vehicle', 'user']));
+        return new ServiceResource($service->load(['vehicle', 'user','status']));
     }
 
     public function delete(Service $service)

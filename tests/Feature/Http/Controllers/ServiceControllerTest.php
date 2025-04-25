@@ -33,6 +33,10 @@ class ServiceControllerTest extends AuthenticatedTestCase
                     ],
                     'started_at',
                     'finished_at',
+                    'status' => [
+                        'id',
+                        'name',
+                    ],
                     'items' => [
                         '*' => [
                             'id',
@@ -120,12 +124,19 @@ class ServiceControllerTest extends AuthenticatedTestCase
             'quantity' => $this->faker->numberBetween(1, 10),
         ]);
 
+        $status = \App\Models\ServiceStatus::factory()->create();
+
         $response = $this->putJson(route('services.update', $service->id), [
             'started_at' => now()->toDateTimeString(),
             'finished_at' => now()->addHours(2)->toDateTimeString(),
-
+            'status_id' => $status->id,
         ]);
+
         $response->assertOk();
+        $this->assertDatabaseHas('services', [
+            'id' => $service->id,
+            'status_id' => $status->id, // Verify status update in the database
+        ]);
     }
 
     public function test_unauthenticated_user_should_not_see_the_service_item_prices(): void

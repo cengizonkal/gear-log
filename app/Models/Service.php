@@ -14,6 +14,7 @@ class Service extends Model
     protected $fillable = [
         'vehicle_id',
         'user_id',
+        'status_id',
         'started_at',
         'finished_at',
     ];
@@ -33,6 +34,10 @@ class Service extends Model
             ->withPivot('quantity', 'price')
             ->withTimestamps();
     }
+    public function status()
+    {
+        return $this->belongsTo(ServiceStatus::class);
+    }
 
     public function isCompleted():Attribute
     {
@@ -50,5 +55,5 @@ class Service extends Model
         );
     }
 
-    
+
 }

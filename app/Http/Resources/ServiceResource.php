@@ -18,13 +18,14 @@ class ServiceResource extends JsonResource
     public function toArray(Request $request): array
     {
         $canViewPrice = $request->user()->can('viewPrice', $this->resource);
-        
+
         return [
             'id' => $this->id,
             'vehicle' => new VehicleResource($this->whenLoaded('vehicle')),
             'user' => new UserResource($this->whenLoaded('user')),
             'started_at' => $this->started_at,
             'finished_at' => $this->finished_at,
+            'status' => new ServiceStatusResource($this->whenLoaded('status')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'items' => $canViewPrice ? ItemResource::collection($this->whenLoaded('items')) :

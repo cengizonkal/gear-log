@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             FuelTypeSeeder::class,
             VehicleModelSeeder::class,
+            ServiceStatusSeeder::class,
         ]);
 
         Owner::factory(10)->create();

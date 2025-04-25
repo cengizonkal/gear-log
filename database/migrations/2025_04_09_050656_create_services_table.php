@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
  *@property mixed  $started_at
  *@property mixed  $finished_at
  *@property mixed  $created_at
- *@property mixed  $updated_at 
+ *@property mixed  $updated_at
  */
 return new class extends Migration {
     /**
@@ -33,6 +33,9 @@ return new class extends Migration {
 
             $table->timestamp('started_at')->nullable();
             $table->timestamp('finished_at')->nullable();
+
+           $table->foreignId('status_id');
+
             $table->text('description')->nullable();
 
 

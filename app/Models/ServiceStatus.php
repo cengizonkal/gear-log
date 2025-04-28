@@ -12,5 +12,6 @@ class ServiceStatus extends Model
     protected $fillable = [
         'name',
         'description',
+        'color',
     ];
 }

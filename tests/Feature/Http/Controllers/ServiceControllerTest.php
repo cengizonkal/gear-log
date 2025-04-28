@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\ServiceStatus;
+use Database\Seeders\ServiceStatusSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -180,4 +182,26 @@ class ServiceControllerTest extends AuthenticatedTestCase
         ]);
     }
 
+    public function test_get_all_service_statuses(): void
+    {
+        $this->withoutExceptionHandling();
+
+        $status = ServiceStatus::factory()->create();
+
+        $response = $this->getJson(route('service-statuses.index'));
+
+        $response->assertOk()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                        'description',
+                        'color',
+                        'created_at',
+                        'updated_at',
+                    ]
+                ]
+            ])->assertJsonCount(1, "data");
+    }
 }

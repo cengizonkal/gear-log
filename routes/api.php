@@ -6,6 +6,7 @@ use App\Http\Controllers\Company\ItemController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceStatusController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Http\Request;
@@ -35,6 +36,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+
+    // Service Statuses
+    Route::get('/service-statuses', [ServiceStatusController::class, 'index'])->name('service-statuses.index');
 
     Route::put('/services/{service}', [ServiceController::class, 'update'])
     ->name('services.update')

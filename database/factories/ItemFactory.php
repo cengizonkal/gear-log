@@ -18,7 +18,6 @@ class ItemFactory extends Factory
     {
         return [
             'company_id' => \App\Models\Company::factory(),
-            'price' => $this->faker->randomFloat(2, 0, 1000),
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
         ];

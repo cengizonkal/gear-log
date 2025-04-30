@@ -14,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\BrandController;
 
-Route::post('/login',  [AuthController::class, 'login'])
+Route::post('/login', [AuthController::class, 'login'])
     ->name('login');
 
 //vehicle routes
 //jwt auth middleware
 Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show'])
     ->name('vehicles.show')->middleware('auth:api');
+
+Route::post('/vehicles', [VehicleController::class, 'store'])
+    ->name('vehicles.store')->middleware('auth:api');
+
+Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])
+    ->name('vehicles.update')->middleware('auth:api');
+
 
 Route::get('/user', [AuthController::class, 'me'])
     ->name('user.show')->middleware('auth:api');
@@ -37,12 +44,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
 
     Route::put('/services/{service}', [ServiceController::class, 'update'])
-    ->name('services.update')
-    ->middleware('can:update,service');
+        ->name('services.update')
+        ->middleware('can:update,service');
 
     Route::delete('/services/{service}', [ServiceController::class, 'delete'])
-    ->name('services.delete')
-    ->middleware('can:delete,service');
+        ->name('services.delete')
+        ->middleware('can:delete,service');
 
     // Owner
     Route::get('/owners', [OwnerController::class, 'index'])->name('owners.index');
@@ -61,16 +68,16 @@ Route::middleware(['auth:api'])->group(function () {
             Route::post('/', [ItemController::class, 'store'])->name('companies.items.store')->middleware('can:update,company');
 
             Route::get('/{item}', [ItemController::class, 'show'])->name('companies.items.show')
-            ->middleware('can:update,item')
-            ->middleware('can:update,company');
+                ->middleware('can:update,item')
+                ->middleware('can:update,company');
 
             Route::put('/{item}', [ItemController::class, 'update'])->name('companies.items.update')
-            ->middleware('can:update,item')
-            ->middleware('can:update,company');
+                ->middleware('can:update,item')
+                ->middleware('can:update,company');
 
             Route::delete('/{item}', [ItemController::class, 'delete'])->name('companies.items.delete')
-            ->middleware('can:update,item')
-            ->middleware('can:update,company');
+                ->middleware('can:update,item')
+                ->middleware('can:update,company');
         });
     });
 

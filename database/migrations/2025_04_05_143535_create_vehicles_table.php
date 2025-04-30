@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->foreignId('fuel_type_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('vin')->unique()->nullable();
+            $table->string('vin',20)->unique()->nullable();
 
 
             $table->timestamps();

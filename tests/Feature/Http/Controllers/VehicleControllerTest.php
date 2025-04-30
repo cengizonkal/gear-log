@@ -79,4 +79,58 @@ class VehicleControllerTest extends AuthenticatedTestCase
             ]);
     }
 
+    public function test_it_should_create_vehicle(): void
+    {
+        $this->withoutExceptionHandling();
+        $vehicle = \App\Models\Vehicle::factory()->make();
+        $response = $this->postJson(route('vehicles.store'), [
+            'license_plate' => $vehicle->license_plate,
+            'mileage' => $vehicle->mileage,
+            'owner_id' => $vehicle->owner_id,
+            'fuel_type_id' => $vehicle->fuel_type_id,
+            'vin' => $vehicle->vin,
+            'vehicle_model_id' => $vehicle->vehicle_model_id,
+        ]);
+        $response->assertOk()
+            ->assertJsonStructure([
+                'message',
+                'vehicle' => [
+                    'id',
+                    'license_plate',
+                    'fuel_type',
+                    'vehicle_model',
+                    'brand',
+                    'vin',
+                    'mileage'
+                ]
+            ]);
+    }
+
+    public function test_it_should_update_vehicle(): void
+    {
+        $this->withoutExceptionHandling();
+        $vehicle = \App\Models\Vehicle::factory()->create();
+        $response = $this->putJson(route('vehicles.update', $vehicle->license_plate), [
+            'license_plate' => 'ABC1234',
+            'mileage' => 10000,
+            'owner_id' => $vehicle->owner_id,
+            'fuel_type_id' => $vehicle->fuel_type_id,
+            'vin' => $vehicle->vin.'1',
+            'vehicle_model_id' => $vehicle->vehicle_model_id,
+        ]);
+        $response->assertOk()
+            ->assertJsonStructure([
+                'message',
+                'vehicle' => [
+                    'id',
+                    'license_plate',
+                    'fuel_type',
+                    'vehicle_model',
+                    'brand',
+                    'vin',
+                    'mileage'
+                ]
+            ]);
+    }
+
 }

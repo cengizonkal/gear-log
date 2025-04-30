@@ -32,7 +32,6 @@ class ItemControllerTest extends TestCase
                 'id',
                 'name',
                 'description',
-                'default_price',
             ]
         ]);
     }
@@ -61,7 +60,6 @@ class ItemControllerTest extends TestCase
                 'id',
                 'name',
                 'description',
-                'default_price',
             ]
         ]);
     }
@@ -82,7 +80,6 @@ class ItemControllerTest extends TestCase
         ]), [
             'name' => 'Updated Item',
             'description' => 'Updated Description',
-            'default_price' => 100.00,
         ]);
         $response->assertForbidden();
 

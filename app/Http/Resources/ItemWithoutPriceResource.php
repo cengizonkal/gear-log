@@ -18,7 +18,6 @@ class ItemWithoutPriceResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'default_price' => 0,
             'quantity' => $this->whenPivotLoaded('item_service', function () {
                 return $this->pivot->quantity;
             }),

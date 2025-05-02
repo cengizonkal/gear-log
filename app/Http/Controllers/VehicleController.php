@@ -40,4 +40,13 @@ class VehicleController extends Controller
                 'vehicle' => new VehicleResource($vehicle),
             ]);
     }
+
+    public function search($plate)
+    {
+        $vehicles = Vehicle::where('license_plate', 'like', '%' . $plate . '%')->get();
+
+        return response()->json([
+            'data' => VehicleResource::collection($vehicles)
+        ]);
+    }
 }

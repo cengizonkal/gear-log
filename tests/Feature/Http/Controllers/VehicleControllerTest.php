@@ -133,4 +133,27 @@ class VehicleControllerTest extends AuthenticatedTestCase
             ]);
     }
 
+    public function test_it_should_search_vehicle_by_license_plate(): void
+    {
+        $this->withoutExceptionHandling();
+        $vehicle = \App\Models\Vehicle::factory()->create();
+        $response = $this->getJson(route('vehicles.search', [
+            'plate' => $vehicle->license_plate,
+        ]));
+        $response->assertOk()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'license_plate',
+                        'fuel_type',
+                        'vehicle_model',
+                        'brand',
+                        'vin',
+                        'mileage'
+                    ]
+                ]
+            ]);
+    }
+
 }

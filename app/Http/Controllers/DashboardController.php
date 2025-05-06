@@ -15,12 +15,12 @@ class DashboardController extends Controller
         $totalOpenServices = \App\Models\Service::where('created_at', '>=', now()->startOfMonth())
             ->where('finished_at', null)
             ->count();
-        //total services that are finished in this month    
+        //total services that are finished in this month
         $totalFinishedServices = \App\Models\Service::where('created_at', '>=', now()->startOfMonth())
             ->whereNotNull('finished_at')
             ->count();
 
-        $last3Services = \App\Models\Service::with(['vehicle', 'user'])
+        $last3Services = \App\Models\Service::with(['vehicle', 'user', 'status'])
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();

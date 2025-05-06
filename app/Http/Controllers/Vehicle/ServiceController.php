@@ -20,7 +20,7 @@ class ServiceController extends Controller
 
     public function show(Vehicle $vehicle, Service $service)
     {
-        return new ServiceResource($service->load(['items', 'user', 'vehicle']));
+        return new ServiceResource($service->load(['items', 'user.company', 'vehicle']));
     }
 
     public function store(Vehicle $vehicle, ServiceRequest $request)

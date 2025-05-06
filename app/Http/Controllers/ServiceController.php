@@ -23,13 +23,13 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        return new ServiceResource($service->load(['items','user','vehicle','status']));
+        return new ServiceResource($service->load(['items','user.company','vehicle','status']));
     }
 
     public function update(ServiceRequest $request, Service $service)
     {
         $service->update($request->validated());
-        return new ServiceResource($service->load(['vehicle', 'user','status']));
+        return new ServiceResource($service->load(['vehicle', 'user.company','status']));
     }
 
     public function delete(Service $service)

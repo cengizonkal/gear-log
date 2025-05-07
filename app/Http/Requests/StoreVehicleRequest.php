@@ -28,7 +28,9 @@ class StoreVehicleRequest extends FormRequest
         'fuel_type_id' => 'required|exists:fuel_types,id',
         'vin' => 'required|string|max:20|unique:vehicles,vin',
         'vehicle_model_id' => 'required|exists:vehicle_models,id',
-        
+        'year' => 'integer',
+        'engine_capacity' => 'integer',
+        'weight' => 'integer',
         ];
     }
 }

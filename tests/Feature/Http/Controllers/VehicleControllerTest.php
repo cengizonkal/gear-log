@@ -117,6 +117,9 @@ class VehicleControllerTest extends AuthenticatedTestCase
             'fuel_type_id' => $vehicle->fuel_type_id,
             'vin' => $vehicle->vin.'1',
             'vehicle_model_id' => $vehicle->vehicle_model_id,
+            'year' => 2020,
+            'engine_capacity' => 2000,
+            'weight' => 1500,
         ]);
         $response->assertOk()
             ->assertJsonStructure([
@@ -128,7 +131,20 @@ class VehicleControllerTest extends AuthenticatedTestCase
                     'vehicle_model',
                     'brand',
                     'vin',
-                    'mileage'
+                    'mileage',
+                    'year',
+                    'engine_capacity',
+                    'weight'
+                ]
+            ])
+            ->assertJson([
+                'vehicle' => [
+                    'license_plate' => 'ABC1234',
+                    'mileage' => 10000,
+                    'vin' => $vehicle->vin.'1',
+                    'year' => 2020,
+                    'engine_capacity' => 2000,
+                    'weight' => 1500,
                 ]
             ]);
     }

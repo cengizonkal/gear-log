@@ -32,6 +32,12 @@ return new class extends Migration {
             $table->string('vin',20)->unique()->nullable();
 
 
+            $table->unsignedInteger('year')->nullable();
+            $table->unsignedInteger('engine_capacity')->nullable();
+            $table->unsignedInteger('weight')->nullable();
+
+
+
             $table->timestamps();
 
 

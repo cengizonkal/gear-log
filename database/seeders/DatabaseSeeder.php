@@ -26,6 +26,13 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
+        User::factory()->create([
+            'name' => 'Cengiz Önkal',
+            'email' => 'onkal.cengiz@gmail.com',
+            'password' => bcrypt('C3ng1z.123'),
+            'is_admin' => true,
+        ]);
+
         $this->call([
             BrandSeeder::class,
             FuelTypeSeeder::class,

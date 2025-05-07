@@ -16,9 +16,7 @@ return new class extends Migration {
             $table->foreignId('brand_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->unsignedInteger('year')->nullable();
-            $table->unsignedInteger('engine_capacity')->nullable();
-
+            
             $table->timestamps();
         });
     }

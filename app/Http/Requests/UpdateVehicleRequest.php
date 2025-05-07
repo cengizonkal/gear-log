@@ -28,6 +28,9 @@ class UpdateVehicleRequest extends FormRequest
             'fuel_type_id' => 'exists:fuel_types,id',
             'vin' => 'string|max:20|unique:vehicles,vin,' . $this->vehicle->id,
             'vehicle_model_id' => 'exists:vehicle_models,id',
+            'year' => 'integer',
+            'engine_capacity' => 'integer',
+            'weight' => 'integer',
         ];
     }
 }

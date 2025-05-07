@@ -29,6 +29,9 @@ class Vehicle extends Model
         'owner_id',
         'fuel_type_id',
         'vin',
+        'year',
+        'engine_capacity',
+        'weight',
     ];
 
     public function getRouteKeyName(): string

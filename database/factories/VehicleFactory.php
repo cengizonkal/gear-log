@@ -23,6 +23,9 @@ class VehicleFactory extends Factory
             'owner_id' => \App\Models\Owner::factory(),
             'fuel_type_id' => \App\Models\FuelType::factory(),
             'vin' => $this->faker->unique()->bothify('1HGCM82633A#######'),
+            'year' => $this->faker->year(),
+            'engine_capacity' => $this->faker->numberBetween(1000, 5000),
+            'weight' => $this->faker->numberBetween(1000, 3000),
         ];
     }
 }

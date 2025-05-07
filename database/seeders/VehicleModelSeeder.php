@@ -40,8 +40,6 @@ class VehicleModelSeeder extends Seeder
             VehicleModel::create([
                 'name' => $model['name'],
                 'brand_id' => $model['brand_id'],
-                'year' => $model['year'],
-                'engine_capacity' => $model['engine'],
             ]);
         }
     }

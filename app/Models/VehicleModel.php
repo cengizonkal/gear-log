@@ -23,8 +23,7 @@ class VehicleModel extends Model
     protected $fillable = [
         'name',
         'brand_id',
-        'year',
-        'engine_capacity',
+        
     ];
 
     public function brand()

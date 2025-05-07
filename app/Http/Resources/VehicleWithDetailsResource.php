@@ -26,6 +26,9 @@ class VehicleWithDetailsResource extends JsonResource
             'owner' => new OwnerResource($this->owner),
             'vin' => $this->vin,
             'mileage' => $this->mileage,
+            'year' => $this->year,
+            'engine_capacity' => $this->engine_capacity,
+            'weight' => $this->weight,
             'services' => ServiceResource::collection(
                 $this->services()->with(['user.company'])
                     ->latest('finished_at')

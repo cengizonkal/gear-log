@@ -25,6 +25,9 @@ class VehicleResource extends JsonResource
             'fuel_type' => $this->fuelType->name,
             'vehicle_model' => $this->vehicleModel->name,
             'brand' => $this->vehicleModel->brand->name,
+            'year' => $this->year,
+            'engine_capacity' => $this->engine_capacity,
+            'weight' => $this->weight,
         ];
     }
 }

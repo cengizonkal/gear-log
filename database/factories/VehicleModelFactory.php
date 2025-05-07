@@ -19,8 +19,7 @@ class VehicleModelFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'brand_id' => \App\Models\Brand::factory(),
-            'year' => $this->faker->year(),
-            'engine_capacity' => $this->faker->numberBetween(1000, 5000),
+            
         ];
     }
 }

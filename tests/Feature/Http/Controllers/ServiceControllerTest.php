@@ -204,4 +204,48 @@ class ServiceControllerTest extends AuthenticatedTestCase
                 ]
             ])->assertJsonCount(1, "data");
     }
+
+    public function test_is_completed_accessor_returns_true_when_finished_at_is_not_null()
+    {
+        $service = \App\Models\Service::factory()->create(['finished_at' => now()]);
+        $this->assertTrue($service->is_completed);
+    }
+
+    public function test_is_completed_accessor_returns_false_when_finished_at_is_null()
+    {
+        $service = \App\Models\Service::factory()->create(['finished_at' => null]);
+        $this->assertFalse($service->is_completed);
+    }
+
+    public function test_total_price_accessor_returns_correct_value()
+    {
+        $service = \App\Models\Service::factory()->create();
+        $items = \App\Models\Item::factory(2)->create();
+
+        $service->items()->attach([
+            $items[0]->id => ['price' => 100, 'quantity' => 2],
+            $items[1]->id => ['price' => 50, 'quantity' => 3],
+        ]);
+
+        $this->assertEquals(350, $service->total_price);
+    }
+
+    public function test_service_belongs_to_vehicle()
+    {
+        $vehicle = \App\Models\Vehicle::factory()->create();
+        $service = \App\Models\Service::factory()->create(['vehicle_id' => $vehicle->id]);
+
+        $this->assertTrue($service->vehicle->is($vehicle));
+    }
+
+    public function test_service_belongs_to_status()
+    {
+        $status = \App\Models\ServiceStatus::factory()->create();
+        $service = \App\Models\Service::factory()->create(['status_id' => $status->id]);
+
+        $this->assertTrue($service->status->is($status));
+    }
+
+
+
 }

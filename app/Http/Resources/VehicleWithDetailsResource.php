@@ -30,7 +30,7 @@ class VehicleWithDetailsResource extends JsonResource
             'engine_capacity' => $this->engine_capacity,
             'weight' => $this->weight,
             'services' => ServiceResource::collection(
-                $this->services()->with(['user.company'])
+                $this->services()->with(['user.company', 'status'])
                     ->latest('finished_at')
                     ->orderByDesc('finished_at')
                     ->take(3)

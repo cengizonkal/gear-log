@@ -15,12 +15,12 @@ class ServiceController extends Controller
 {
     public function index(Vehicle $vehicle)
     {
-        return ServiceResource::collection($vehicle->services);
+        return ServiceResource::collection($vehicle->services()->with('status')->get());
     }
 
     public function show(Vehicle $vehicle, Service $service)
     {
-        return new ServiceResource($service->load(['items', 'user.company', 'vehicle']));
+        return new ServiceResource($service->load(['items', 'user.company', 'vehicle', 'status']));
     }
 
     public function store(Vehicle $vehicle, ServiceRequest $request)

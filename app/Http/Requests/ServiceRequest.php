@@ -19,6 +19,7 @@ class ServiceRequest extends FormRequest
             'started_at'    => 'date',
             'finished_at'   => 'nullable|date|after:started_at',
             'status_id'     => 'exists:service_statuses,id',
+            'description'   => 'nullable|string|max:255',
         ];
     }
 }

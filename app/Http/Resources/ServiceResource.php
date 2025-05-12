@@ -26,10 +26,12 @@ class ServiceResource extends JsonResource
             'started_at' => $this->started_at,
             'finished_at' => $this->finished_at,
             'status' => new ServiceStatusResource($this->whenLoaded('status')),
+            'status_id' => $this->status_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'items' => $canViewPrice ? ItemResource::collection($this->whenLoaded('items')) :
                 ItemWithoutPriceResource::collection($this->whenLoaded('items')),
+            'description' => $this->description,
         ];
     }
 }

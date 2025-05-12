@@ -17,6 +17,11 @@ class Service extends Model
         'status_id',
         'started_at',
         'finished_at',
+        'description',
+    ];
+    protected $casts = [
+        'started_at' => 'datetime',
+        'finished_at' => 'datetime',
     ];
 
     public function vehicle()

@@ -22,7 +22,7 @@ class StoreVehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'license_plate' => 'required|string|max:10',
+        'license_plate' => 'required|string|min:5|max:10',
         'mileage' => 'required|integer',
         'owner_id' => 'required|exists:owners,id',
         'fuel_type_id' => 'required|exists:fuel_types,id',

@@ -17,7 +17,7 @@ class ServiceRequest extends FormRequest
             'vehicle_id'    => 'exists:vehicles,id',
             'user_id'       => 'exists:users,id',
             'started_at'    => 'date',
-            'finished_at'   => 'nullable|date|after:started_at',
+            'finished_at'   => 'nullable|date|after_or_equal:started_at',
             'status_id'     => 'exists:service_statuses,id',
             'description'   => 'nullable|string|max:255',
         ];

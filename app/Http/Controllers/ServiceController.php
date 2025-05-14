@@ -9,7 +9,10 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::with(['vehicle', 'user','status'])->get();;
+        $services = auth()->user()->company->services()
+            ->with(['items', 'user.company', 'vehicle', 'status'])
+            ->latest()
+            ->paginate(10);
         return ServiceResource::collection($services);
     }
 
@@ -23,13 +26,13 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        return new ServiceResource($service->load(['items','user.company','vehicle','status']));
+        return new ServiceResource($service->load(['items', 'user.company', 'vehicle', 'status']));
     }
 
     public function update(ServiceRequest $request, Service $service)
     {
         $service->update($request->validated());
-        return new ServiceResource($service->load(['vehicle', 'user.company','status']));
+        return new ServiceResource($service->load(['vehicle', 'user.company', 'status']));
     }
 
     public function delete(Service $service)

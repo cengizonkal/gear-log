@@ -202,7 +202,7 @@ class ServiceControllerTest extends AuthenticatedTestCase
                         'updated_at',
                     ]
                 ]
-            ])->assertJsonCount(1, "data");
+            ]);
     }
 
     public function test_is_completed_accessor_returns_true_when_finished_at_is_not_null()

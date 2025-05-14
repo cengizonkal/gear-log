@@ -32,4 +32,8 @@ class Company extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+    public function services(){
+        return $this->hasManyThrough(Service::class, User::class);
+    }
 }

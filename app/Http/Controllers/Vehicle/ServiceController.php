@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Vehicle;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ServiceRequest;
+use App\Http\Requests\StoreServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Vehicle;
 use App\Models\Service;
@@ -23,7 +23,7 @@ class ServiceController extends Controller
         return new ServiceResource($service->load(['items', 'user.company', 'vehicle', 'status']));
     }
 
-    public function store(Vehicle $vehicle, ServiceRequest $request)
+    public function store(Vehicle $vehicle, StoreServiceRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;

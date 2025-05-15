@@ -33,7 +33,43 @@ class Company extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function services(){
+    public function services()
+    {
         return $this->hasManyThrough(Service::class, User::class);
+    }
+
+
+
+    public function totalServicesThisMonth()
+    {
+        return $this->services()
+            ->where('services.created_at', '>=', now()->startOfMonth())
+            ->count();
+    }
+
+    public function totalOpenServicesThisMonth()
+    {
+        return $this->services()
+            ->whereNotIn('status_id', [3, 7])
+            ->where('services.created_at', '>=', now()->startOfMonth())
+            ->count();
+    }
+
+    public function totalFinishedServicesThisMonth()
+    {
+        return $this->services()
+            ->where('status_id', 3)
+            ->where('services.created_at', '>=', now()->startOfMonth())
+            ->count();
+    }
+
+    public function last3Services()
+    {
+        return $this->services()
+            ->with(['vehicle', 'user', 'status'])
+            ->where('services.status_id', '!=', 7)
+            ->orderBy('services.created_at', 'desc')
+            ->take(3)
+            ->get();
     }
 }

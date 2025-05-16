@@ -56,11 +56,12 @@ class ItemControllerTest extends TestCase
         $response = $this->putJson(route('companies.items.update', ['company' => $company->id, 'item' => $item->id]), $itemData);
 
         $response->assertOk()->assertJsonStructure([
-            'data' => [
+            'item' => [
                 'id',
                 'name',
                 'description',
-            ]
+            ],
+            'message'
         ]);
     }
 
@@ -96,12 +97,15 @@ class ItemControllerTest extends TestCase
         $this->actingAs($user);
 
 
-        $response = $this->deleteJson(route('companies.items.delete', [
-            'company' => $company->id,
-            'item' => $item->id]
+        $response = $this->deleteJson(route(
+            'companies.items.delete',
+            [
+                'company' => $company->id,
+                'item' => $item->id
+            ]
         ));
 
-        $response->assertNoContent();
+        $response->assertOk();
     }
 
     public function test_user_cannot_delete_another_users_item(): void

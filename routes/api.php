@@ -97,9 +97,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/vehicles/{vehicle}/services/{service}', [\App\Http\Controllers\Vehicle\ServiceController::class, 'show'])->name('vehicles.services.show');
     Route::post('/vehicles/{vehicle}/services', [\App\Http\Controllers\Vehicle\ServiceController::class, 'store'])->name('vehicles.services.store');
     Route::get('/vehicles/search/{plate}', [VehicleController::class, 'search'])->name('vehicles.search'); // Vehicle search by plate
+    
     //items
     Route::get('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'index'])->name('vehicles.services.items.index');
     Route::post('/vehicles/{vehicle}/services/{service}/items', [\App\Http\Controllers\Vehicle\Service\ItemController::class, 'store'])->name('vehicles.services.items.store');
+
+
+    Route::post('/vehicles-with-owner', [\App\Http\Controllers\StoreVehicleWithOwnerController::class, 'store'])
+        ->name('vehicles-with-owner.store');
 
 
     //user
@@ -111,6 +116,9 @@ Route::middleware(['auth:api'])->group(function () {
 
     // Fuel Types
     Route::get('/fuel-types', [FuelTypeController::class, 'index'])->name('fuel-types.index');
+
+    // Vehicle Models
+    Route::get('/vehicle-models', [\App\Http\Controllers\VehicleModelController::class, 'index'])->name('vehicle-models.index');
 
     // Report
     Route::post('/reports', [ReportController::class, 'generate'])->name('reports.generate');

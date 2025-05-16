@@ -10,7 +10,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        return BrandResource::collection(\App\Models\Brand::with('vehicleModels')->get());
+        return BrandResource::collection(\App\Models\Brand::all());
     }
 
 }

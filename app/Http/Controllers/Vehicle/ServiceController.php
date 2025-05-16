@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vehicle;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Resources\ServiceResource;
+use App\Models\ServiceStatus;
 use App\Models\Vehicle;
 use App\Models\Service;
 use Dedoc\Scramble\Attributes\Group;
@@ -25,10 +26,12 @@ class ServiceController extends Controller
 
     public function store(Vehicle $vehicle, StoreServiceRequest $request)
     {
+        
         $data = $request->validated();
         $data['user_id'] = auth()->user()->id;
-        $service = Service::create($data);
-        $vehicle->services()->save($service);
+        $data['status_id'] = ServiceStatus::PENDING;
+        
+        $service =$vehicle->services()->create($data);
         return new ServiceResource($service);
     }
 

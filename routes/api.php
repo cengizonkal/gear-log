@@ -33,6 +33,13 @@ Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])
 Route::get('/user', [AuthController::class, 'me'])
     ->name('user.show')->middleware('auth:api');
 
+//Route::post('/services/{service}/download', [ServiceController::class, 'download'])
+//    ->name('services.download')
+//    ->middleware('can:download,service');
+
+Route::get('/services/{service}/download', [ServiceController::class, 'download']);
+
+
 
 
 
@@ -54,6 +61,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('/services/{service}', [ServiceController::class, 'delete'])
         ->name('services.delete')
         ->middleware('can:delete,service');
+
+
 
     // Owner
     Route::get('/owners', [OwnerController::class, 'index'])->name('owners.index');

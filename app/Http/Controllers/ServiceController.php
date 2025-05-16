@@ -6,6 +6,8 @@ use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class ServiceController extends Controller
 {
     public function index()
@@ -35,6 +37,20 @@ class ServiceController extends Controller
         $service->update($request->validated());
         return new ServiceResource($service->load(['vehicle', 'user.company', 'status']));
     }
+
+    public function download(Service $service)
+    {
+        $service = $service->load(['items', 'user.company', 'vehicle', 'status']);
+        $file_name = $service->vehicle->license_plate . '-servis.pdf';
+        $pdf = Pdf::loadView('services.pdf.index', ['service' => $service]);
+
+        return response($pdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $file_name . '"',
+            'X-FileName' => $file_name,
+        ]);
+    }
+
 
     public function delete(Service $service)
     {

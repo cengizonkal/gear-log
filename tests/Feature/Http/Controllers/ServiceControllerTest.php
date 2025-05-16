@@ -246,6 +246,22 @@ class ServiceControllerTest extends AuthenticatedTestCase
         $this->assertTrue($service->status->is($status));
     }
 
+    public function test_it_should_download_service()
+    {
+        $this->withoutExceptionHandling();
+        $service = \App\Models\Service::factory()->create();
 
+        $items = \App\Models\Item::factory(10)->create();
+        //add items to the service
+        $service->items()->attach($items->pluck('id')->toArray(), [
+            'price' => 100,
+            'quantity' => $this->faker->numberBetween(1, 10),
+        ]);
+
+        auth()->login($service->user);
+
+        $response = $this->postJson(route('services.download', $service->id));
+        $response->assertOk();
+    }
 
 }

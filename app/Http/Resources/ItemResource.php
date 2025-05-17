@@ -21,6 +21,9 @@ class ItemResource extends JsonResource
             'price' => $this->whenPivotLoaded('item_service', function () {
                 return $this->pivot->price;
             }),
+            'note' => $this->whenPivotLoaded('item_service', function () {
+                return $this->pivot->note;
+            }),
         ];
     }
 

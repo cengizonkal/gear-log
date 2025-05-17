@@ -15,6 +15,7 @@ class Item extends Model
         'price',
         'name',
         'description',
+        'note',
     ];
 
     public function company()

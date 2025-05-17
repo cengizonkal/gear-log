@@ -20,6 +20,8 @@ class VehicleModelResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'brand_id' => $this->brand_id,
+            'brand' => new BrandResource($this->whenLoaded('brand')),
         ];
     }
 }

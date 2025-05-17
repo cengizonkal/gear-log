@@ -17,7 +17,7 @@ return new class extends Migration {
                 ->onDelete('cascade');
 
 
-            $table->string('license_plate')->unique();
+            $table->string('license_plate',10)->unique();
             $table->unsignedInteger('mileage')->nullable();
             $table->foreignId('owner_id')
                 ->constrained()

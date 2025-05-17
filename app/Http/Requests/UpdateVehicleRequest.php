@@ -26,11 +26,11 @@ class UpdateVehicleRequest extends FormRequest
             'mileage' => 'integer',
             'owner_id' => 'exists:owners,id',
             'fuel_type_id' => 'exists:fuel_types,id',
-            'vin' => 'string|max:20|unique:vehicles,vin,' . $this->vehicle->id,
+            'vin' => 'nullable|string|max:20|unique:vehicles,vin,' . $this->vehicle->id,
             'vehicle_model_id' => 'exists:vehicle_models,id',
-            'year' => 'integer',
-            'engine_capacity' => 'integer',
-            'weight' => 'integer',
+            'year' => 'nullable|integer',
+            'engine_capacity' => 'nullable|integer',
+            'weight' => 'nullable|integer',
         ];
     }
 }

@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'company' => new CompanyResource($this->whenLoaded('company')),
+            'company_id' => $this->company_id,
         ];
         
     }

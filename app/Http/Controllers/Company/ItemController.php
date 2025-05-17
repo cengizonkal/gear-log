@@ -23,7 +23,11 @@ class ItemController extends Controller
     public function store(ItemRequest $request, Company $company)
     {
         $item = $company->items()->create($request->validated());
-        return new ItemResource($item);
+        return response()
+            ->json([
+                'message' => 'Başarıyla eklendi',
+                'item' => new ItemResource($item->load('company')),
+            ]);
     }
 
     public function show(Company $company, Item $item)
@@ -34,13 +38,20 @@ class ItemController extends Controller
     public function update(ItemRequest $request, Company $company, Item $item)
     {
         $item->update($request->validated());
-        return new ItemResource($item->load('company'));
+        return response()
+            ->json([
+                'message' => 'Başarıyla güncellendi.',
+                'item' => new ItemResource($item->load('company')),
+            ]);
     }
 
     public function delete(Company $company, Item $item)
     {
         $this->authorize('delete', $item);
         $item->delete();
-        return response()->noContent();
+        return response()
+            ->json([
+                'message' => 'Başarıyla silindi.',
+            ]);
     }
 }

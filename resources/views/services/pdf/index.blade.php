@@ -28,7 +28,7 @@
         <td><strong>Telefon</strong></td>
     </tr>
     <tr>
-        <td>{{ $service->vehicle->license_plate }}</td>
+        <td><span style="text-transform:uppercase"> {{ $service->vehicle->license_plate }} </span></td>
         <td>{{ $service->vehicle->owner->name }}</td>
         <td>{{ $service->vehicle->owner->phone }}</td>
     </tr>
